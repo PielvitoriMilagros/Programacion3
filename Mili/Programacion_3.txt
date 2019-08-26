@@ -1,0 +1,38 @@
+CLASE 1  26/08
+
+Programación --> PHP
+Base de Datos --> SQL -- MySql
+						 Oracle
+						 Sql Server
+				  NO SQL -- Mongada
+							Firebase
+							Dynamoda
+
+Instalar para usar servidor: XAMPP Control Panel
+
+Selecciono Apache y Start
+Espero que aparezcan los Port: 80 (HTTP) y 443 (HTTPS)
+Si el 80 no funciona o está ocupado tengo que abrir el Config, busco Listen: 80 y lo reemplazo por 8080
+
+En Chrome: localhost:80  --> Me lleva a mi página servidor
+disco C/Xampp/htdocs --> Creo una carpeta donde va a estar mi código
+Arrastro la carpeta a VisualStudioCode
+Creo index.php   --> SIEMPRE las lineas terminan con ;
+
+<?php
+
+echo "Hola Mundo";
+
+?>
+
+Para probar no se usa más el Chrome. Abrir postMan (si no abre, cerrar Chrome, abrir PostMan y volver a abrir Chrome normal)
+En la barra de arriba están los métodos (GET, POST...) Realiza las peticiones que haríamos en el Chrome
+Siempre me conviene usar el nombre del archivo
+
+Se puede crear una Colección y empezar a guardar las peticiones que se hacen
+
+Environment --> Para no tener que cambiarl las url según en qué ambiente esté, creo un Environment y una variable URL con mi IP.
+Creo un ambiente nuevo en la tuerquita, manage environments
+Para usar la variable, solamente pongo {{URL}}
+Cuando cambio de ambiente y necesito cambiar la IP, solo le cambio el valor a mi variable.
+
