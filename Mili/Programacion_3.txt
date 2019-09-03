@@ -54,7 +54,7 @@ require_once 'funciones.php';  --> verifica que no esté ya incluido para que no 
 Conviene en el index usar include, y en lo demás require_once, porque cuando voy saltando de clases, se me pueden pisar los include.
 
 Crear una clase  --> Class
-atributos --> modificador de acceso (public, private)
+atributos --> modificador de acceso (public, private) + $ + nombreAtributo
 constructor --> function + __construct()
 
 Ningún método de php se puede sobrecargar
@@ -72,8 +72,115 @@ Si se hace con uno, se tiene que hacer con todos los siguientes. Los anteriores 
         echo 'Hola '.$this->nombre;
     }
 
-HERENCIA DE CLASES --> en lugar de los : para heredar se usa extends
-Para usar el constructor, en vez de base se llama --> parent::__construct(parametros);
+HERENCIA DE CLASES --> en lugar de los : para heredar se usa extends    -->    class Alumno extends Persona
+Para usar el constructor, en vez de base se llama --> parent::__construct(parámetros);
+function __construct()
+{
+    parent::__construct($nombre,$dni);
+    $this->legajo = $legajo;
+}
+
+Se utiliza ->(flecha) para acceder a los miembros de un objeto de instancia
+Se utiliza ::(cuatro puntos) para acceder a los miembro estáticos de una clase
+
+
+
 
 Implementar interfaz ADMIN --> Inscribirse - Rendir
+
+
+
+CLASE 2 - 02/09
+Todo lo que empieza con $_ son variables globales.
+Arman arrays:
+$_GET
+$_POST
+$_SERVER
+$_REQUEST
+
+Cada verbo por convención hace algo distinto.
+GET		--> Pide recursos
+POST	--> Inserta recursos
+PUT		--> Modifica recursos
+DELETE	--> Elimina recursos
+
+var_dump($_GET)     ó     echo $_GET[nombre]	--> Siendo nombre la key que puse en el PostMan:
+Tengo que apretar 'Param' en el costadito del PostMan y me da la opción para cargar key - value
+La URL se queda con el formato ......php?key=value&key=value&key=value
+En lo que se ve en la URL no se mandan datos relevantes como tarjetas o claves
+
+GET es la petición y se ve arriba en la URL
+POST la información va en el body no en la URL
+PUT cualquiera de las dos formas
+
+var_dump($_POST) --> Los parámetros van en el body, hay una solapa en PostMan abajo de la URL
+Completo en los dos primeros radiobutton
+
+isset(petición)	--> Devuelve si existe o no la petición
+
+Todo error o warning que se muestra, está mal
+
+var_dump($_SERVER)  --> Muestra información de la petición y del servidor
+
+
+En el index:
+$_GET 				--> Listado alumno
+$_POST				--> Guardar alumno
+$_PUT				--> Modificar alumno
+$_DELETE			--> Borrar alumno
+En el index no tiene que haber lógica, todo eso va en otras clases
+
+Json --> Objeto Javascript
+  	 --> Se escribe entre llaves con pares de clave: valor,
+											  clave: valor,
+											  clave: valor
+	 --> Se puede devolver un array de objetos con comas , entre cada par de llaves
+	 {
+	 },
+	 {
+	 },
+	 {
+	 }
+	 
+PHP tiene dos métodos --> Json_encode y Json_decode
+$rta[]=true;	--> Agarrar el array y lo convierte en string    --> Json_encode  --> '{"rta":true}'
+
+json_encode --> Requiere un objeto con atributos públicos
+
+TODO EN PHP DESCIENDE DE STANDARD CLASS
+
+Json_encode con atributos privados, no funciona
+Hay que crear un objeto nuevo con atributos publicos...
+Json_encode(alumno) --> Paso el objeto a formato json
+Si tiene atributos privados me genera un json vacío
+Para que no pase creo un objeto con atributos públicos, igual al de atributos privados
+$nuevoObjeto = new standars class
+$nuevoObjeto->$this->nombre    -->    La funcion que hace eso es get_object_vars($this)		-->	Devuelve un array que se puede parsear
+Hay que crear una funcion con el return de get_object_vars($this)
+$alumno->toObject();
+
+*Ponerle a cada una de las peticiones ahora el parámetro 'caso' para poder manejar varias peticiones (arrays)
+/pasan nombre,apellido,legajo y caso/
+
+El servidor no recuerda los estados de las demás peticiones
+$_SESSION --> Guarda el estado en el servidor
+
+Para mantener la petición en el servidor:
+Primer código:   session_start()
+
+if(!isset($_SESSION["cont"]))
+{
+	$_SESSION["cont"]=0;
+}
+$_SESSION["cont"]+=1;
+
+
+Cada usuario que ingresa tiene su contador y el servidor guarda la sesión de todos los usuarios.
+
+session_destroy()  o session_unset() sirven para eliminar la sesión. Usamos los dos para asegurar.
+
+
+
+
+
 
